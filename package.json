@@ -1,0 +1,11 @@
+{
+  "name": "vtlf-auto-open",
+  "main": "./lib/vtlf-auto-open",
+  "version": "0.1.0",
+  "description": "VTLF plugin to open files that are too big for Atom",
+  "repository": "https://github.com/mark-hahn/vtlf-auto-open",
+  "license": "MIT",
+  "dependencies": {
+    "fs-plus": ">2.0.0"
+  }
+}
