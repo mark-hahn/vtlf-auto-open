@@ -6,8 +6,9 @@ fs = require 'fs-plus'
 module.exports =
 class AutoOpen
   
-  @activate = ->
-    ViewOpener = require '../lib/view-opener'
+  @activate = (vtlfLibPath) ->
+    ViewOpener = require vtlfLibPath + 'view-opener'
+    
     atom.workspace.registerOpener (filePath, options) =>
       if fs.getSizeSync(filePath) >= 2 * 1048576 
         new ViewOpener filePath, @
