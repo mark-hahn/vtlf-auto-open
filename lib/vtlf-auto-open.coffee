@@ -14,7 +14,8 @@ class AutoOpen
         new ViewOpener filePath, @
         
   constructor: (filePath, @view, @reader, @lineMgr, @viewOpener) ->
-    @view.open()
+    if @viewOpener.getCreatorPlugin() is AutoOpen
+      @view.open()
     
-  destroy: -> atom.workspace.unregisterOpener @viewOpener
+  # destroy: -> atom.workspace.unregisterOpener @viewOpener
   
