@@ -2,20 +2,20 @@
 # vtlf-auto-open
 
 fs = require 'fs-plus'
+_  = require "underscore"
 
 module.exports =
 class AutoOpen
   
-  @activate = (vtlfLibPath) ->
+  constructor: (state, vtlfLibPath, @pluginMgr) ->
     ViewOpener = require vtlfLibPath + 'view-opener'
     
-    atom.workspace.registerOpener (filePath, options) =>
-      if fs.getSizeSync(filePath) >= 2 * 1048576 
-        new ViewOpener filePath, @
+    atom.workspace.registerOpener @opener = 
+      (filePath, options) =>
+        if fs.getSizeSync(filePath) >= 2 * 1048576 
+          new ViewOpener filePath, @
         
-  constructor: (filePath, @view, @reader, @lineMgr, @viewOpener) ->
-    if @viewOpener.getCreatorPlugin() is AutoOpen
-      @view.open()
-    
-  # destroy: -> atom.workspace.unregisterOpener @viewOpener
+  @destroy: -> 
+    if @singletonInstance
+      atom.workspace.unregisterOpener @singletonInstance.opener
   
