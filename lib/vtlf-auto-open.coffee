@@ -9,11 +9,11 @@ class AutoOpen
   @type = 'singleton'
   
   constructor: (pluginMgr, state, vtlfLibPath) ->
-    ViewOpener = require vtlfLibPath + 'view-opener'
+    Viewer = require vtlfLibPath + 'viewer'
     
     @opener = (filePath, options) =>
       if fs.getSizeSync(filePath) >= 2 * 1048576 
-        new ViewOpener filePath
+        new Viewer filePath
         
     atom.workspace.registerOpener @opener
     
